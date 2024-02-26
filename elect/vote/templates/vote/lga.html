@@ -1,0 +1,15 @@
+{% extends "vote/base.html" %}
+
+  {% block head %} 
+    Voting Results in "{{ area }}" LGA
+  {% endblock %}
+  
+  
+  {% block guide %}
+  See votings results by wards
+  {% endblock %}
+  
+  
+  {% block crumb %}
+  <li class="breadcrumb-item"><a href="{% url "vote:index" %}">Total-Votes</a></li>
+  {% endblock %}

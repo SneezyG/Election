@@ -1,0 +1,58 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store New Vote Results</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vote/css/bootstrap.min.css' %}">
+    <style>
+      h2 {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 5px;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5 mb-4">Store New Vote Results</h2>
+        <form method="post" action="{% url 'vote:new_vote' %}" class="row">
+           {% csrf_token %}
+           <div class="mb-1 text-end p-3">
+           <a href="{% url 'vote:index' %}" class="btn btn-primary">vote results</a>
+           </div>
+           {{ form_error|safe }}
+            <div class="mb-3 col-md-6">
+                <label for="id_polling_unit_name" class="form-label">Polling Unit Name</label>
+                <input type="text" name="polling_unit_name" id="id_polling_unit_name" class="form-control" autocomplete="off" required>
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="id_party_abbreviation" class="form-label">Party Abbreviation</label>
+                <input type="text" name="party_abbreviation" id="id_party_abbreviation" class="form-control" autocomplete="off" required>
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="id_party_score" class="form-label">Party Score</label>
+                <input type="number" name="party_score" id="id_party_score" class="form-control" autocomplete="off" required>
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="id_user_name" class="form-label">User Name</label>
+                <input type="text" name="user_name" id="id_user_name" class="form-control" autocomplete="off" required>
+            </div>
+            <div class="">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    
+</body>
+</html>

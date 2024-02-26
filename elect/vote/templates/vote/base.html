@@ -1,0 +1,68 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Results</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'vote/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vote/css/style.css' %}">
+    <script src="{% static 'vote/script/anime.min.js' %}" defer></script>
+    <script src="{% static 'vote/script/script.js' %}" defer></script>
+</head>
+<body>
+    <header>
+        <p class="fw-medium head-text">
+          {% block head %} 
+          Total Voting Results in "Delta State"
+          {% endblock %}
+        </p>
+        <nav>
+          <p> 
+          {% block guide %}
+          See votings results by LGA 
+          {% endblock %}
+          </p>
+          {% if destination %}
+          <form method="post" action="{{ destination }}" class="input-group mb-3"> {% csrf_token %}
+           <input id="input-location" type="text" name="name" class="form-control" placeholder="{{ searchText }}"
+             aria-label="Example text with button addon" aria-describedby="button-addon1" list="location" autocomplete="off">
+           <input type="hidden" name="lga" value="{{ lgaId }}">
+           <input type="hidden" name="ward" value="{{ wardId }}">
+           <button id="location-btn" class="btn btn-success" type="submit" id="button-addon1" disabled>Submit</button>
+           <datalist id="location">
+            {% for local in locations %}
+            <option value="{{local}}">{{local}}</option>
+            {% endfor %}
+           </datalist>
+          </form>
+          {% endif %}
+          <ol class="breadcrumb">
+           {% block crumb %}
+           {% endblock %}
+          </ol>
+        </nav>
+    </header>
+    <main>
+        <div class="new-vote">
+        <a href="{% url 'vote:new_vote' %}" class="btn btn-primary">Add Vote</a>
+        </div>
+        <div class="voting-results container">
+          <div class="row gx-5">
+          {% if results %}
+            {% for result in results %}
+            <div class="party col-md-6 col-lg-4">
+                <image class="logo" src="{% static 'vote/images/' %}{{ result.party_abbreviation|lower }}.jpeg" alt="{{ result.party_abbreviation|upper }}" />
+                <span class="votes" data-votes="{{result.votes}}">0</span>
+            </div>
+            {% endfor %}
+          {% else %}
+           <p class="fw-semibold text-center">no result found</p>
+          {% endif %}
+          </div>
+        </div>
+    </main>
+    <footer> ©Ahmad Gbolahan </footer>
+</body>
+</html>

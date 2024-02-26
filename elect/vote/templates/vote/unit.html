@@ -1,0 +1,17 @@
+{% extends "vote/base.html" %}
+
+  {% block head %} 
+    Voting Results in "{{ area }}" Polling unit
+  {% endblock %}
+  
+  
+  {% block guide %}
+  
+  {% endblock %}
+  
+  
+  {% block crumb %}
+  <li class="breadcrumb-item"><a href="{% url "vote:index" %}">Total-Votes</a></li>
+  <li class="breadcrumb-item"><a href="{% url "vote:get_lga" lgaName %}">LGA-Votes</a></li>
+  <li class="breadcrumb-item"><a href="{% url "vote:get_ward" wardName lgaId %}">Ward-Votes</a></li>
+  {% endblock %}
